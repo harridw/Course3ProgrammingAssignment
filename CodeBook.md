@@ -40,6 +40,20 @@ dest_zip <- paste(file.path(maindir, zipdir),"dataset.zip", sep = "/", collapse 
 download.file(fileURL, destfile = dest_zip)  
 ````
 
+**Unzip files into separate directory / folder**  
+````r
+NOTE: Use maindir defined above -- 'maindir'  
+unzipdir <- "unzipfiles"  
+if(!file.exists(unzipdir)) {dir.create(file.path(maindir, unzipdir))}  
+dest_unzip <- file.path(maindir, unzipdir)  
+unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = FALSE,  
+      exdir = dest_unzip, unzip = "internal", setTimes = FALSE)  
+````
+
+
+
+
+
 
 
 
