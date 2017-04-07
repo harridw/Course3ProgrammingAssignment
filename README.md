@@ -67,7 +67,6 @@ test
 2. X_test.txt  
 3. y_test.txt  
 ```
-Intertial Signals  
 1. body_acc_x_test.txt  
 2. body_acc_y_test.txt  
 3. body_acc_z_test.txt  
@@ -77,6 +76,25 @@ Intertial Signals
 7. total_acc_x_test.txt  
 8. total_acc_y_test.txt  
 9. total_acc_z_test.txt  
+```
+
+train  
+1. subject_train.txt  
+2. X_train.txt  
+3. y_train.txt  
+```
+Inerial Signals (train subfolder)  
+1. body_acc_x_train.txt  
+2. body_acc_y_train.txt  
+3. body_acc_z_train.txt  
+4. body_gyro_x_train.txt  
+5. body_gyro_y_train.txt
+6. body_gyro_z_train.txt  
+7. total_acc_x_train.txt  
+8. total_acc_y_train.txt  
+9. total_acc_z_train.txt  
+```
+
 
 
 
