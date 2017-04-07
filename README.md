@@ -67,6 +67,7 @@ test
 2. X_test.txt  
 3. y_test.txt  
 ```
+Inertial Signals (test subfolder)
 1. body_acc_x_test.txt  
 2. body_acc_y_test.txt  
 3. body_acc_z_test.txt  
@@ -83,7 +84,7 @@ train
 2. X_train.txt  
 3. y_train.txt  
 ```
-Inerial Signals (train subfolder)  
+Inertial Signals (train subfolder)  
 1. body_acc_x_train.txt  
 2. body_acc_y_train.txt  
 3. body_acc_z_train.txt  
