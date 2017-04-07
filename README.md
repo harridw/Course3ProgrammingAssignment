@@ -98,7 +98,7 @@ Inertial Signals (train subfolder)
 
 Below steps load the text (txt) files into R. The process / steps are similar for each group, or category, of  
 files: General, test, train.  
-````r
+````
 General 'txt' files  
 unzipdir <- "UCI HAR Dataset"
 unzip_main <- file.path(dest_unzip, unzipdir)
@@ -155,7 +155,7 @@ train_inertial_signals <- "Inertial Signals"
 train_main <- file.path(dest_unzip, traindir)
 train_inertial <- file.path(train_main, train_inertial_signals)
 
-#  Read text files into R from the 'root' test directory / folder [NOTE: multiple files]
+#  Read text files into R from the 'root' train directory / folder [NOTE: multiple files]
 train_filelist1 <- list.files(path = train_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                               recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
@@ -168,7 +168,7 @@ for(i in file_train1)  {
 }
 
 
-#  Read text files into R from the 'Inertial Signals' folder of 'test' directory / folder [NOTE: multiple files]
+#  Read text files into R from the 'Inertial Signals' folder of 'train' directory / folder [NOTE: multiple files]
 train_filelist2 <- list.files(path = train_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                               recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
@@ -179,7 +179,7 @@ for(i in file_train2)  {
       filepath <- file.path(train_inertial,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
 }
-
+````
 
 
 
