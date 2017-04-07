@@ -99,7 +99,7 @@ Inertial Signals (train subfolder)
 Below steps load the text (txt) files into R. The process / steps are similar for each group, or category, of  
 files: General, test, train.  
 ````r
-**General 'txt' files**  
+General 'txt' files  
 unzipdir <- "UCI HAR Dataset"
 unzip_main <- file.path(dest_unzip, unzipdir)
 
@@ -107,17 +107,17 @@ Read text files into R from the 'root' test directory / folder [NOTE: multiple f
 unzip_filelist1 <- list.files(path = unzip_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE, recursive = FALSE,
                              ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
-Remove text (txt) extension so that file name can be used as name in R
+#  Remove text (txt) extension so that file name can be used as name in R
 file_unzip1 <- gsub(".txt", "", unzip_filelist1)
 
-Read all listed files into R 
+#  Read all listed files into R 
 for(i in file_unzip1)  {
       filepath <- file.path(unzip_main, paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, fill = TRUE, header = FALSE)))
 }
-***
 
-**test 'txt' files, including Inertial Signals**  
+
+test 'txt' files, including Inertial Signals  
 #  The initial step is to more clearly define / document the 'path' to location of files
 testdir <- "UCI HAR Dataset/test"
 test_inertial_signals <- "Inertial Signals"
@@ -135,7 +135,6 @@ for(i in file_names1)  {
       filepath <- file.path(test_main,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
 }
----
 
 #  Read text files into R from the 'Inertial Signals' folder of 'test' directory / folder [NOTE: multiple files to be read]
 test_filelist2 <- list.files(path = test_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE, recursive = FALSE,
@@ -148,7 +147,38 @@ for(i in file_names2)  {
       filepath <- file.path(test_inertial,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
 }
-***
+
+train 'txt' files, including Inertial Signals  
+#  The initial step is to more clearly define / document the 'path' to location of files
+traindir <- "UCI HAR Dataset/train"
+train_inertial_signals <- "Inertial Signals"
+train_main <- file.path(dest_unzip, traindir)
+train_inertial <- file.path(train_main, train_inertial_signals)
+
+#  Read text files into R from the 'root' test directory / folder [NOTE: multiple files to be read]
+train_filelist1 <- list.files(path = train_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE, recursive = FALSE,
+                             ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+#  Remove text (txt) extension so that file name can be used as name in R
+file_train1 <- gsub(".txt", "", train_filelist1)
+
+for(i in file_train1)  {
+      filepath <- file.path(train_main,paste(i,".txt",sep=""))
+      assign(i, data.table(read.table(filepath, header = FALSE)))
+}
+
+
+#  Read text files into R from the 'Inertial Signals' folder of 'test' directory / folder [NOTE: multiple files to be read]
+train_filelist2 <- list.files(path = train_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE, recursive = FALSE,
+                             ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+#  Remove text (txt) extension so that file name can be used as name in R
+file_train2 <- gsub(".txt", "", train_filelist2)
+
+for(i in file_train2)  {
+      filepath <- file.path(train_inertial,paste(i,".txt",sep=""))
+      assign(i, data.table(read.table(filepath, header = FALSE)))
+}
 
 
 
