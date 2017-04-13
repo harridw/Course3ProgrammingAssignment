@@ -10,12 +10,16 @@ You should create one R script called run_analysis.R that does the following.
 5.	From the data set in step 4, creates a second, independent tidy data set with the average of each variable
 for each activity and each subject.
 
-Load packages
+**Load packages**  
+This represents a list of the packages anticipated to be used during the assignment
 ````r
 library(plyr)
 library(dplyr)
 library(data.table)
 library(dtplyr)
+library(Hmisc)
+library(tidyr)
+library(reshape2)
 ````
 
 **Background information for data**   
@@ -97,7 +101,8 @@ Inertial Signals (train subfolder)
 ```
 
 Below steps load the text (txt) files into R. The process / steps are similar for each group, or category, of  
-files: General, test, train.  
+files: General, test, train.  This code development occurred prior to realizing that 'Inertial Signals files  
+are not required to complete assignment.
 ````
 General 'txt' files  
 unzipdir <- "UCI HAR Dataset"
@@ -180,6 +185,36 @@ for(i in file_train2)  {
       assign(i, data.table(read.table(filepath, header = FALSE)))
 }
 ````
+
+###**Cleaning the Data**  
+To combine, or merge, datasets with more descriptive information about an observation to the variables, a first step  
+is preparing the data within each file / dataset.  Below are steps pursued:
+
+Remaming columns in a couple tables in lieu of default names (e.g. V1, V2...) when read into R
+````r
+setnames(activity_labels, c("V1", "V2"), c("activityid", "activity"))
+setnames(subject_test, c("V1"), c("subjectid"))
+setnames(subject_train, c("V1"), c("subjectid"))
+setnames(y_test, c("V1"), c("activityid"))
+setnames(y_train, c("V1"), c("activityid"))
+````
+
+Creating indexes for files to improve merging of datasets.  Of particular interest is to maintain the order
+observations are stored in  the dataset --> consistency with variable datasets (X_test, X_train)
+````r
+y_test$rowindx <- as.factor(seq(along = y_test$activityid))
+y_train$rowindx <- as.factor(seq(along = y_train$activityid))
+subject_test$rowindx <- as.factor(seq(along = subject_test$subjectid))
+subject_train$rowindx <- as.factor(seq(along = subject_train$subjectid))
+````
+
+
+
+
+
+
+
+
 
 
 
