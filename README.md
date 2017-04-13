@@ -186,7 +186,7 @@ for(i in file_train2)  {
 }
 ````
 
-###**Cleaning the Data**  
+### **Cleaning the Data**  
 To combine, or merge, datasets with more descriptive information about an observation to the variables, a first step  
 is preparing the data within each file / dataset.  Below are steps pursued:
 
