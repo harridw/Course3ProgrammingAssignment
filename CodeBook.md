@@ -696,7 +696,10 @@ indx      	feature                         stat        axial  domain	category   
 558	angle(tBodyGyroJerkMean,gravityMean)	other     	U    	t     	bodygyrojerk   	tbodygyrojerk_otherU          
 559	angle(X,gravityMean)                	other     	X    	u     	unknown        	uunknown_otherX               
 560	angle(Y,gravityMean)                	other     	Y    	u     	unknown        	uunknown_otherY               
-561	angle(Z,gravityMean)                	other     	Z    	u     	unknown        	uunknown_otherZ               
+561	angle(Z,gravityMean)                	other     	Z    	u     	unknown        	uunknown_otherZ            
+
+The final data table, 'X_tidy_data' includes only those variables with 'mean' or 'std' in stat column --> filter()  
+
 ````
 
 #### **activity_labels.txt**  
