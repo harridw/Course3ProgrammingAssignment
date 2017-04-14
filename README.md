@@ -212,7 +212,7 @@ subject_train$rowindx <- as.factor(seq(along = subject_train$subjectid))
 The first datasets to be merged relate to descriptive information about an observation (e.g. subject id, activity).  
 These datasets will be merged, or combined [using cbind()], with the variable datasets to provide more complete dataset.
 
-Step 1:  Merge 'activity' datasets
+Step 1:  Merge 'activity' datasets  
 The 'activity_labels' dataset represents a table of the description for each of 6 (index: 1 - 6) defined activities.  
 For each observation, the datasets 'y_test' and 'y_train' identify the activity.  A 'rowindx' was added (see prior step)  
 to both datasets, 'y_test' and 'y_train'
