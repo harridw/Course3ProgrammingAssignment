@@ -186,7 +186,7 @@ for(i in file_train2)  {
 }
 ````
 
-### **Cleaning the Data**  
+#### **Cleaning the Data**  
 To combine, or merge, datasets with more descriptive information about an observation to the variables, a first step  
 is preparing the data within each file / dataset.  Below are steps pursued:
 
@@ -208,8 +208,66 @@ subject_test$rowindx <- as.factor(seq(along = subject_test$subjectid))
 subject_train$rowindx <- as.factor(seq(along = subject_train$subjectid))
 ````
 
+#### **Merge Datasets - part 1**  
+The first datasets to be merged relate to descriptive information about an observation (e.g. subject id, activity).  
+These datasets will be merged, or combined [using cbind()], with the variable datasets to provide more complete dataset.
 
+Step 1:  Merge 'activity' datasets
+The 'activity_labels' dataset represents a table of the description for each of 6 (index: 1 - 6) defined activities.  
+For each observation, the datasets 'y_test' and 'y_train' identify the activity.  A 'rowindx' was added (see prior step)  
+to both datasets, 'y_test' and 'y_train'
 
+NOTE:  'activityid' is name assigned to id of activity in datasets: activtiy_labels, y_test, y_train
+````r
+_Add activity label / description to each observation in y_test and y_train_  
+test_activity <- merge(y_test, activity_labels, by = "activityid")
+train_activity <- merge(y_train, activity_labels, by = "activityid")  
+
+_head(test_activity, n = 5)_  
+activityid rowindx activity
+    1        80    WALKING
+    1        81    WALKING
+    1        82    WALKING
+    1        83    WALKING
+    1        84    WALKING
+````
+
+Step 2:  Merge 'subject' and 'activity' datasets
+This step produces a more complete picture, or description, of each observation, before including variables.  The 'rowindx'
+previously noted is used in this step to merge files and maintain the order of each observation listed in the dataset.  To  
+remove unnecessary data, 'activityid', a select() is used to exclude it from the dataset.
+````r
+row_label_test <- merge(subject_test, test_activity, by = "rowindx", all = TRUE)
+row_label_test <- select(row_label_test, -c(activityid))
+
+row_label_train <- merge(subject_train, train_activity, by = "rowindx", all = TRUE)
+row_label_train <- select(row_label_train, -c(activityid))  
+
+_head(row_label_test, n = 5)_  
+rowindx subjectid activity
+     1         2 STANDING  
+     2         2 STANDING
+     3         2 STANDING
+     4         2 STANDING
+     5         2 STANDING
+
+** Review step of data**  
+Below is a quick distribution of activities for each individual / subject id (subid)
+Purpose: understand distribution for an individual and within an activity [signficant differences?]
+attach(row_label_test)
+table(subid, activity)
+Results of table() for 'test' observations
+subid LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS
+2      48      46       54      59                 47               48
+4      54      50       56      60                 45               52
+9      50      50       45      52                 42               49
+10     58      54       44      53                 38               47
+12     60      51       61      50                 46               52
+13     62      49       57      57                 47               55
+18     65      57       73      56                 55               58
+20     68      66       73      51                 45               51
+24     72      68       69      58                 55               59
+````
 
 
 
