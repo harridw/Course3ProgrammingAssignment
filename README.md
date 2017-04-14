@@ -219,11 +219,11 @@ to both datasets, 'y_test' and 'y_train'
 
 NOTE:  'activityid' is name assigned to id of activity in datasets: activtiy_labels, y_test, y_train
 ````r
-_Add activity label / description to each observation in y_test and y_train_  
-test_activity <- merge(y_test, activity_labels, by = "activityid")
-train_activity <- merge(y_train, activity_labels, by = "activityid")  
+Add activity label / description to each observation in y_test and y_train  
+- test_activity <- merge(y_test, activity_labels, by = "activityid")
+- train_activity <- merge(y_train, activity_labels, by = "activityid")  
 
-_head(test_activity, n = 5)_  
+head(test_activity, n = 5)  
 activityid rowindx activity
     1        80    WALKING
     1        81    WALKING
@@ -232,7 +232,7 @@ activityid rowindx activity
     1        84    WALKING
 ````
 
-Step 2:  Merge 'subject' and 'activity' datasets
+Step 2:  Merge 'subject' and 'activity' datasets  
 This step produces a more complete picture, or description, of each observation, before including variables.  The 'rowindx'
 previously noted is used in this step to merge files and maintain the order of each observation listed in the dataset.  To  
 remove unnecessary data, 'activityid', a select() is used to exclude it from the dataset.
@@ -243,7 +243,7 @@ row_label_test <- select(row_label_test, -c(activityid))
 row_label_train <- merge(subject_train, train_activity, by = "rowindx", all = TRUE)
 row_label_train <- select(row_label_train, -c(activityid))  
 
-_head(row_label_test, n = 5)_  
+head(row_label_test, n = 5)  
 rowindx subjectid activity
      1         2 STANDING  
      2         2 STANDING
@@ -253,10 +253,11 @@ rowindx subjectid activity
 
 ** Review step of data**  
 Below is a quick distribution of activities for each individual / subject id (subid)
-Purpose: understand distribution for an individual and within an activity [signficant differences?]
-attach(row_label_test)
-table(subid, activity)
-Results of table() for 'test' observations
+Purpose: understand distribution for an individual and within an activity [signficant differences?]  
+- attach(row_label_test)
+- table(subid, activity)
+
+Results of table() for 'test' observations:  
 subid LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS
 2      48      46       54      59                 47               48
 4      54      50       56      60                 45               52
