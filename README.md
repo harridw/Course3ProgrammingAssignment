@@ -104,86 +104,87 @@ Below steps load the text (txt) files into R. The process / steps are similar fo
 files: General, test, train.  This code development occurred prior to realizing that 'Inertial Signals files  
 are not required to complete assignment.
 ````
-General 'txt' files  
-unzipdir <- "UCI HAR Dataset"
-unzip_main <- file.path(dest_unzip, unzipdir)
+General 'txt' files    
+- unzipdir <- "UCI HAR Dataset"
+- unzip_main <- file.path(dest_unzip, unzipdir)
 
 Read text files into R from the 'root' test directory / folder [NOTE: multiple files]
-unzip_filelist1 <- list.files(path = unzip_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
+- unzip_filelist1 <- list.files(path = unzip_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                               recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
-#  Remove text (txt) extension so that file name can be used as name in R
-file_unzip1 <- gsub(".txt", "", unzip_filelist1)
+Remove text (txt) extension so that file name can be used as name in R
+- file_unzip1 <- gsub(".txt", "", unzip_filelist1)
 
-#  Read all listed files into R 
-for(i in file_unzip1)  {
+Read all listed files into R  
+- for(i in file_unzip1)  {
       filepath <- file.path(unzip_main, paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, fill = TRUE, header = FALSE)))
-}
+  }
 
 
 test 'txt' files, including Inertial Signals  
-#  The initial step is to more clearly define / document the 'path' to location of files
-testdir <- "UCI HAR Dataset/test"
-test_inertial_signals <- "Inertial Signals"
-test_main <- file.path(dest_unzip, testdir)
-test_inertial <- file.path(test_main, test_inertial_signals)
 
-#  Read text files into R from the 'root' test directory / folder [NOTE: multiple files]
-test_filelist1 <- list.files(path = test_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
+The initial step is to more clearly define / document the 'path' to location of files
+- testdir <- "UCI HAR Dataset/test"
+- test_inertial_signals <- "Inertial Signals"
+- test_main <- file.path(dest_unzip, testdir)
+- test_inertial <- file.path(test_main, test_inertial_signals)
+
+Read text files into R from the 'root' test directory / folder [NOTE: multiple files]
+- test_filelist1 <- list.files(path = test_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                              recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
-#  Remove text (txt) extension so that file name can be used as name in R
-file_names1 <- gsub(".txt", "", test_filelist1)
+Remove text (txt) extension so that file name can be used as name in R
+- file_names1 <- gsub(".txt", "", test_filelist1)
 
-for(i in file_names1)  {
+- for(i in file_names1)  {
       filepath <- file.path(test_main,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
-}
+  }
 
-#  Read text files into R from the 'Inertial Signals' folder of 'test' directory / folder [NOTE: multiple files]
-test_filelist2 <- list.files(path = test_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
+Read text files into R from the 'Inertial Signals' folder of 'test' directory / folder [NOTE: multiple files]
+- test_filelist2 <- list.files(path = test_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                              recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
-#  Remove text (txt) extension so that file name can be used as name in R
-file_names2 <- gsub(".txt", "", test_filelist2)
+Remove text (txt) extension so that file name can be used as name in R
+- file_names2 <- gsub(".txt", "", test_filelist2)
 
-for(i in file_names2)  {
+- for(i in file_names2)  {
       filepath <- file.path(test_inertial,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
-}
+  }
 
 train 'txt' files, including Inertial Signals  
-#  The initial step is to more clearly define / document the 'path' to location of files
-traindir <- "UCI HAR Dataset/train"
-train_inertial_signals <- "Inertial Signals"
-train_main <- file.path(dest_unzip, traindir)
-train_inertial <- file.path(train_main, train_inertial_signals)
 
-#  Read text files into R from the 'root' train directory / folder [NOTE: multiple files]
-train_filelist1 <- list.files(path = train_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
+The initial step is to more clearly define / document the 'path' to location of files
+- traindir <- "UCI HAR Dataset/train"
+- train_inertial_signals <- "Inertial Signals"
+- train_main <- file.path(dest_unzip, traindir)
+- train_inertial <- file.path(train_main, train_inertial_signals)
+
+Read text files into R from the 'root' train directory / folder [NOTE: multiple files]
+- train_filelist1 <- list.files(path = train_main, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                               recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
-#  Remove text (txt) extension so that file name can be used as name in R
-file_train1 <- gsub(".txt", "", train_filelist1)
+Remove text (txt) extension so that file name can be used as name in R
+- file_train1 <- gsub(".txt", "", train_filelist1)
 
-for(i in file_train1)  {
+- for(i in file_train1)  {
       filepath <- file.path(train_main,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
-}
+  }
 
-
-#  Read text files into R from the 'Inertial Signals' folder of 'train' directory / folder [NOTE: multiple files]
-train_filelist2 <- list.files(path = train_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
+Read text files into R from the 'Inertial Signals' folder of 'train' directory / folder [NOTE: multiple files]
+- train_filelist2 <- list.files(path = train_inertial, pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
                               recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
 
-#  Remove text (txt) extension so that file name can be used as name in R
-file_train2 <- gsub(".txt", "", train_filelist2)
+Remove text (txt) extension so that file name can be used as name in R
+- file_train2 <- gsub(".txt", "", train_filelist2)
 
-for(i in file_train2)  {
+- for(i in file_train2)  {
       filepath <- file.path(train_inertial,paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, header = FALSE)))
-}
+  }
 ````
 
 #### **Cleaning the Data**  
@@ -192,20 +193,20 @@ is preparing the data within each file / dataset.  Below are steps pursued:
 
 Remaming columns in a couple tables in lieu of default names (e.g. V1, V2...) when read into R
 ````r
-setnames(activity_labels, c("V1", "V2"), c("activityid", "activity"))
-setnames(subject_test, c("V1"), c("subjectid"))
-setnames(subject_train, c("V1"), c("subjectid"))
-setnames(y_test, c("V1"), c("activityid"))
-setnames(y_train, c("V1"), c("activityid"))
+- setnames(activity_labels, c("V1", "V2"), c("activityid", "activity"))
+- setnames(subject_test, c("V1"), c("subjectid"))
+- setnames(subject_train, c("V1"), c("subjectid"))
+- setnames(y_test, c("V1"), c("activityid"))
+- setnames(y_train, c("V1"), c("activityid"))
 ````
 
 Creating indexes for files to improve merging of datasets.  Of particular interest is to maintain the order
 observations are stored in  the dataset --> consistency with variable datasets (X_test, X_train)
 ````r
-y_test$rowindx <- as.factor(seq(along = y_test$activityid))
-y_train$rowindx <- as.factor(seq(along = y_train$activityid))
-subject_test$rowindx <- as.factor(seq(along = subject_test$subjectid))
-subject_train$rowindx <- as.factor(seq(along = subject_train$subjectid))
+- y_test$rowindx <- as.factor(seq(along = y_test$activityid))
+- y_train$rowindx <- as.factor(seq(along = y_train$activityid))
+- subject_test$rowindx <- as.factor(seq(along = subject_test$subjectid))
+- subject_train$rowindx <- as.factor(seq(along = subject_train$subjectid))
 ````
 
 #### **Merge Datasets - part 1**  
@@ -237,11 +238,11 @@ This step produces a more complete picture, or description, of each observation,
 previously noted is used in this step to merge files and maintain the order of each observation listed in the dataset.  To  
 remove unnecessary data, 'activityid', a select() is used to exclude it from the dataset.
 ````r
-row_label_test <- merge(subject_test, test_activity, by = "rowindx", all = TRUE)
-row_label_test <- select(row_label_test, -c(activityid))
+- row_label_test <- merge(subject_test, test_activity, by = "rowindx", all = TRUE)
+- row_label_test <- select(row_label_test, -c(activityid))
 
-row_label_train <- merge(subject_train, train_activity, by = "rowindx", all = TRUE)
-row_label_train <- select(row_label_train, -c(activityid))  
+- row_label_train <- merge(subject_train, train_activity, by = "rowindx", all = TRUE)
+- row_label_train <- select(row_label_train, -c(activityid))  
 
 head(row_label_test, n = 5)  
 rowindx subjectid activity
