@@ -727,8 +727,8 @@ for 'y_test'.  As illustrated in table subset below, the 'rowindx' prevents re-o
 if only 'activityid' was included.  
 
 ````r
-Table: 'y_train'			Table: 'y_test'	
-activityid	rowindx		activityid	rowindx
+Table: 'y_train'			  Table: 'y_test'	
+activityid	rowindx		  activityid	rowindx
      5      	  1     		     5      	  1     
      5      	  2     		     5      	  2     
      5      	  3     		     5      	  3     
