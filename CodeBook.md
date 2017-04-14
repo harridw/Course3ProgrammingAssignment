@@ -794,8 +794,9 @@ activityid	rowindx		        activityid	rowindx
 
 #### **Subject ID by observation**  
 Tables 'subject_test' and 'subject_train' included only the subject id or index for each of the observations.  To facilitate  
-the accurate use of this data, a 'rowindx' column is added to assign each instance of the 'subjectid' to a specific observation,  
-or row. The 'rowindx' is created by using seq() function:  seq(along = y_test$subjectid) and seq(along = y_train$subjectid)  
+the accurate use of this data, a 'rowindx' column is added to assign each instance of the 'subjectid' to a specific  
+observation, or row. The 'rowindx' is created by using seq() function:  seq(along = y_test$subjectid) and  
+seq(along = y_train$subjectid)  
 
 Similiar to the activity data, only a subset of the table, first 100 rows, is illustrated for each table.  There are 7,352 rows  
 for 'subject_train' and 2,947 rows for 'subject_test'.  As illustrated in table subset below, the 'rowindx' prevents re-ordering  
@@ -804,7 +805,7 @@ of data which could occur if only 'subjectid' was captured.
 NOTE:  There are 30 unique subject id.  subject_test: 2, 4, 9, 10, 12, 13, 18, 20,24; subject_train: remaining up to 30  
 ````r
 Table:  'subject_train'			Table:  'subject_test'	
-subjectid	rowindx		    subjectid	rowindx
+subjectid	rowindx		      subjectid	rowindx
      1    	  1     		     2    	  1     
      1    	  2     		     2    	  2     
      1    	  3     		     2    	  3     
