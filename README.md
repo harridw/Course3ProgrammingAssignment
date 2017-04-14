@@ -252,7 +252,8 @@ rowindx subjectid activity
      4         2 STANDING
      5         2 STANDING
 
-** Review step of data**  
+A Review Step
+
 Below is a quick distribution of activities for each individual / subject id (subid)
 Purpose: understand distribution for an individual and within an activity [signficant differences?]  
 - attach(row_label_test)
@@ -270,6 +271,38 @@ subid LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS
 20     68      66       73      51                 45               51
 24     72      68       69      58                 55               59
 ````
+
+#### **'Features' Dataset**  
+The 'features' dataset is a vector of the 561 variable column-names represented in 'X_test' and 'X_train'.  Two requirements  
+of the assignment, include:  
+1.	Extracts only the measurements on the mean and standard deviation for each measurement. 
+2.	Appropriately labels the data set with descriptive variable names.  
+
+Below are steps taken to identify those coloumns representing a measurement of mean and standard deviation.  To do this, we
+look at each 'feature' to for phrase "mean()" or "std()".  A flag is to identify these variables appropriately.  All other variables  
+are defaulted with a flag of 'other'.  To maintain integrity of original 'features' dataset, a new 'measures' data is used  
+to capture these updates to the dataset.  
+````r
+measures <- setnames(features, c("V1", "V2"), c("indx", "feature"))  
+head(features, n = 5)
+indx           feature
+ 1    tBodyAcc-mean()-X
+ 2    tBodyAcc-mean()-Y
+ 3    tBodyAcc-mean()-Z
+ 4    tBodyAcc-std()-X
+ 5    tBodyAcc-std()-Y
+````
+
+A new coolumn is added, 'stat', to capture flag identifying the variable as 'mean()', 'std()', or 'other'  
+The grepl() function looks for the defined 'phrase' in the variable name.  If it finds a match, it returns 'TRUE'.  Using  
+the ifelse(), we can determine what action, or step, to take next.  It is used here to set flag defining the variable.
+````r
+measures$stat <- ifelse(grepl(pattern = "mean()", measures$feature, ignore.case = FALSE, fixed = TRUE), "mean",
+                        ifelse(grepl(pattern = "std()", measures$feature, ignore.case = FALSE, fixed = TRUE), "std", "other"))  
+````
+
+
+
 
 
 
