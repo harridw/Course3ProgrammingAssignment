@@ -722,6 +722,73 @@ the accurate use of this data, a 'rowindx' column is added to assign the activit
 This ensures that observation / row 1 has the same activity id/index associated with it.  The 'rowindx' is created  
 by using seq() function:  seq(along = y_test$activityid) and seq(along = y_train$activitiyid)  
 
+Below represents only the first 60 rows of data for each table.  There are 7,352 rows for 'y_train' and 2,947 rows  
+for 'y_test'.  As illustrated in table subset below, the 'rowindx' prevents re-ordering of data which could occur  
+if only 'activityid' was included.  
+
+````r
+Table: 'y_train'			Table: 'y_test'	
+activityid	rowindx		activityid	rowindx
+     5      	  1     		     5      	  1     
+     5      	  2     		     5      	  2     
+     5      	  3     		     5      	  3     
+     5      	  4     		     5      	  4     
+     5      	  5     		     5      	  5     
+     5      	  6     		     5      	  6     
+     5      	  7     		     5      	  7     
+     5      	  8     		     5      	  8     
+     5      	  9     		     5      	  9     
+     5      	  10    		     5      	  10    
+     5      	  11    		     5      	  11    
+     5      	  12    		     5      	  12    
+     5      	  13    		     5      	  13    
+     5      	  14    		     5      	  14    
+     5      	  15    		     5      	  15    
+     5      	  16    		     5      	  16    
+     5      	  17    		     5      	  17    
+     5      	  18    		     5      	  18    
+     5      	  19    		     5      	  19    
+     5      	  20    		     5      	  20    
+     5      	  21    		     5      	  21    
+     5      	  22    		     5      	  22    
+     5      	  23    		     5      	  23    
+     5      	  24    		     5      	  24    
+     5      	  25    		     5      	  25    
+     5      	  26    		     5      	  26    
+     5      	  27    		     5      	  27    
+     4      	  28    		     5      	  28    
+     4      	  29    		     5      	  29    
+     4      	  30    		     5      	  30    
+     4      	  31    		     5      	  31    
+     4      	  32    		     4      	  32    
+     4      	  33    		     4      	  33    
+     4      	  34    		     4      	  34    
+     4      	  35    		     4      	  35    
+     4      	  36    		     4      	  36    
+     4      	  37    		     4      	  37    
+     4      	  38    		     4      	  38    
+     4      	  39    		     4      	  39    
+     4      	  40    		     4      	  40    
+     4      	  41    		     4      	  41    
+     4      	  42    		     4      	  42    
+     4      	  43    		     4      	  43    
+     4      	  44    		     4      	  44    
+     4      	  45    		     4      	  45    
+     4      	  46    		     4      	  46    
+     4      	  47    		     4      	  47    
+     4      	  48    		     4      	  48    
+     4      	  49    		     4      	  49    
+     4      	  50    		     4      	  50    
+     4      	  51    		     4      	  51    
+     6      	  52    		     4      	  52    
+     6      	  53    		     4      	  53    
+     6      	  54    		     4      	  54    
+     6      	  55    		     4      	  55    
+     6      	  56    		     6      	  56    
+     6      	  57    		     6      	  57    
+     6      	  58    		     6      	  58    
+     6      	  59    		     6      	  59    
+     6      	  60    		     6      	  60    
 
 
 
