@@ -389,13 +389,59 @@ Combine, using cbind() function, the labels (subjectid, activity) for each obser
 - X_test_interim <- select(X_test_interim, -rowindx)
 - X_train_interim <- cbind(row_label_train, X_train_filter)
 - X_train_interim <- select(X_train_interim, -rowindx)
+
+head(X_test_interim, n = 3) --> not all columns represented below
+subjectid   activity    tbodyacc_meanX    tbodyacc_meanY tbodyacc_meanZ tbodyacc_stdX
+       2    STANDING      0.2571778       -0.02328523    -0.01465376    -0.9384040
+       2    STANDING      0.2860267       -0.01316336    -0.11908252    -0.9754147
+       2    STANDING      0.2754848       -0.02605042    -0.11815167    -0.9938190
 ````
 
+#### **Melting** 
+The last merge / combine activities results in two dataset.  One represents the 'test' population (X_test_interim)  
+the other is 'train' population (X_train_interim).  Because there are multiple observations for each subjectid 
+and activity it does not qualify as 'tidy' data.  The melt() function to define a relationship between ids  
+(subjectid, activity) and measures (variables).  By default, if not an 'id' it is a measure.
+````r
+X_test_melt <- melt(X_test_interim, id = c("subjectid", "activity"))
+X_train_melt <- melt(X_train_interim, id = c("subjectid", "activity"))
+````
 
+#### **Unique subjectid & activity** 
+The dcast() function enables us to combine variables for like 'id' (subjectid, activity) according to some function.  
+Mean is used in this assignment, but others are possible.  The result is a single row/observation for each subjectid  
+& activity cobmination.  The resulting variable represents the mean() of the input values.  
+````r
+X_test_final <- dcast(X_test_melt, subjectid+activity ~ variable, fun = mean)
+X_train_final <- dcast(X_train_melt, subjectid+activity ~ variable, fun = mean)
+````
 
+#### **Tidy Data** 
+With dataset scrubbed, we can create a single 'tidy' data file that combines 'test' & 'train' populations.  The rbind()  
+function is used to complete this action.  The resulting file is 180 rows (6 activities for 30 subject id) by  
+68 columns (2 label columns + 66 variable columns).
 
+NOTE:  No specific order was applied to data table.
+````r
+X_tidy_data <- rbind(X_test_final, X_train_final)
 
+dim(X_tidy_data)
+[1] 180  68
 
+head(X_tidy_data, n = 3)
+  subjectid activity tbodyacc_meanX tbodyacc_meanY tbodyacc_meanZ tbodyacc_stdX
+        2   LAYING      0.2813734    -0.01815874     -0.1072456    -0.9740595
+        2   SITTING     0.2770874    -0.01568799     -0.1092183    -0.9868223
+        2   STANDING    0.2779115    -0.01842083     -0.1059085    -0.9872719
+````
 
+#### **Save the file** 
+This final steep saves 'X_tidy_data' to a local directory / folder.  Two separate type of files were saved:  
+'.RData' and '.csv'.  We use the setwd() function to save the file in the desired location.  
+````r
+setwd ("/Users/harridw/Development/Coursera/Course3/PeerGraded/Course3ProgrammingAssignment")
+save(X_tidy_data, file = "X_tidy_data.RData")
+write.csv(X_tidy_data, file = "X_tidy_data.csv")
+````
 
 
