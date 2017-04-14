@@ -213,7 +213,7 @@ observations are stored in  the dataset --> consistency with variable datasets (
 The first datasets to be merged relate to descriptive information about an observation (e.g. subject id, activity).  
 These datasets will be merged, or combined [using cbind()], with the variable datasets to provide more complete dataset.
 
-Step 1:  Merge 'activity' datasets  
+**Step 1:  Merge 'activity' datasets**  
 The 'activity_labels' dataset represents a table of the description for each of 6 (index: 1 - 6) defined activities.  
 For each observation, the datasets 'y_test' and 'y_train' identify the activity.  A 'rowindx' was added (see initial steps
 to 'Cleaning the Data' stated above) to both datasets, 'y_test' and 'y_train'  
@@ -233,7 +233,7 @@ activityid rowindx activity
     1        84    WALKING
 ````
 
-Step 2:  Merge 'subject' and 'activity' datasets  
+**Step 2:  Merge 'subject' and 'activity' datasets**    
 This step produces a more complete picture, or description, of each observation, before including variables.  The 'rowindx'
 previously noted is used in this step to merge files and maintain the order of each observation listed in the dataset.  To  
 remove unnecessary data, 'activityid', a select() is used to exclude it from the dataset.
@@ -279,9 +279,9 @@ of the assignment, include:
 2.	Appropriately labels the data set with descriptive variable names.  
 
 Below are steps taken to identify those coloumns representing a measurement of mean and standard deviation.  To do this, we
-look at each 'feature' to for phrase "mean()" or "std()".  A flag is to identify these variables appropriately.  All other variables  
-are defaulted with a flag of 'other'.  To maintain integrity of original 'features' dataset, a new 'measures' data is used  
-to capture these updates to the dataset.  
+look at each 'feature' to for phrase "mean()" or "std()".  A flag is to identify these variables appropriately.  All other    
+variables are defaulted with a flag of 'other'.  To maintain integrity of original 'features' dataset, a new 'measures    
+data is used to capture these updates to the dataset.  
 ````r
 measures <- setnames(features, c("V1", "V2"), c("indx", "feature"))  
 head(features, n = 5)
@@ -298,7 +298,8 @@ The grepl() function looks for the defined 'phrase' in the variable name.  If it
 the ifelse(), we can determine what action, or step, to take next.  It is used here to set flag defining the variable.
 ````r
 measures$stat <- ifelse(grepl(pattern = "mean()", measures$feature, ignore.case = FALSE, fixed = TRUE), "mean",
-                        ifelse(grepl(pattern = "std()", measures$feature, ignore.case = FALSE, fixed = TRUE), "std", "other"))  
+                        ifelse(grepl(pattern = "std()", measures$feature, ignore.case = FALSE, fixed = TRUE),
+                                    "std", "other"))  
 ````
 
 
