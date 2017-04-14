@@ -135,7 +135,7 @@ strings within feature column, using grepl() function, to assign names / codes t
 - category --> assigned based on the signal measure, including those after apply Fast Fourier Transform (FFT)   
 
 ````r
-indx      	feature                         stat      axial  domain	category          clearname                     
+indx      	feature                         stat        axial  domain	category          clearname                     
 1  	tBodyAcc-mean()-X                   	mean      	X    	t     	bodyacc        	tbodyacc_meanX                
 2  	tBodyAcc-mean()-Y                   	mean      	Y    	t     	bodyacc        	tbodyacc_meanY                
 3  	tBodyAcc-mean()-Z                   	mean      	Z    	t     	bodyacc        	tbodyacc_meanZ                
