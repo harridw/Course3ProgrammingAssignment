@@ -293,8 +293,8 @@ indx           feature
  5    tBodyAcc-std()-Y
 ````
 
-A new coolumn is added, 'stat', to capture flag identifying the variable as 'mean()', 'std()', or 'other'  
-The grepl() function looks for the defined 'phrase' in the variable name.  If it finds a match, it returns 'TRUE'.  Using  
+A new column is added, 'stat', to capture flag identifying the variable as 'mean()', 'std()', or 'other'. The  
+grepl() function looks for the defined 'phrase' in the variable name.  If it finds a match, it returns 'TRUE'.  Using  
 the ifelse(), we can determine what action, or step, to take next.  It is used here to set flag defining the variable.
 ````r
 measures$stat <- ifelse(grepl(pattern = "mean()", measures$feature, ignore.case = FALSE, fixed = TRUE), "mean",
@@ -302,6 +302,51 @@ measures$stat <- ifelse(grepl(pattern = "mean()", measures$feature, ignore.case 
                                     "std", "other"))  
 ````
 
+To address the second requirement, appropriately label the data set with descriptive variable names, the names are  
+further split or categorize the variable names.  Three additional columns are added to create a label to be used for
+createing a descriptive name.  The grepl() function with ifelse() is again used to assign desired labels to each variable.  
+````r
+Define a high-level category of the features [consistent with feature vector -- see CodeBook.R]
+- measures$category <- ifelse(grepl(pattern = "BodyAccJerkMag", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodyaccjerkmag",
+                        ifelse(grepl(pattern = "BodyAccJerk", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodyaccjerk",
+                        ifelse(grepl(pattern = "BodyAccMag", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodyaccmag",
+                        ifelse(grepl(pattern = "BodyAcc", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodyacc",
+                        ifelse(grepl(pattern = "BodyGyroJerkMag", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodygyrojerkmag",
+                        ifelse(grepl(pattern = "BodyGyroJerk", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodygyrojerk",
+                        ifelse(grepl(pattern = "BodyGyroMag", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodygyromag",
+                        ifelse(grepl(pattern = "BodyGyro", measures$feature, ignore.case = FALSE, fixed = TRUE), "bodygyro",
+                        ifelse(grepl(pattern = "GravityAccMag", measures$feature, ignore.case = FALSE), "gravityaccmag",
+                        ifelse(grepl(pattern = "GravityAcc", measures$feature, ignore.case = FALSE), "gravityacc", "unknown"))))))))))
+
+This identifies measurement variables based on '(t)ime' or '(f)requency'.
+- measures$domain <- ifelse(grepl(pattern = "^f", measures$feature, ignore.case = FALSE), "f",
+                              ifelse(grepl(pattern = "\\(f", measures$feature, ignore.case = FALSE), "f",
+                              ifelse(grepl(pattern = "^t", measures$feature, ignore.case = FALSE), "t",
+                              ifelse(grepl(pattern = "\\(t", measures$feature, ignore.case = FALSE), "t", "u"))))
+
+
+Measurements were taken on three axials ('X', 'Y", 'Z').  This code assigns measurement variable accordingly
+- measures$axial <- ifelse(grepl(pattern = "X", measures$feature, ignore.case = FALSE, fixed = TRUE), "X",
+                              ifelse(grepl(pattern = "Y", measures$feature, ignore.case = FALSE, fixed = TRUE), "Y",
+                              ifelse(grepl(pattern = "Z", measures$feature, ignore.case = FALSE, fixed = TRUE), "Z","U")))
+````
+
+A final column, 'clearname', is added.  This column represents a combination of other columns using paste() function.  
+This is the name to be used for variable names of the tidy data set.  
+````r
+measures$clearname <- paste(measures$domain, measures$category,"_", measures$stat, measures$axial, sep = "")  
+
+head(measures, n = 5)
+indx       feature    stat  axial domain category      clearname
+ 1 tBodyAcc-mean()-X  mean     X      t  bodyacc   tbodyacc_meanX
+ 2 tBodyAcc-mean()-Y  mean     Y      t  bodyacc   tbodyacc_meanY
+ 3 tBodyAcc-mean()-Z  mean     Z      t  bodyacc   tbodyacc_meanZ
+ 4  tBodyAcc-std()-X  std      X      t  bodyacc   tbodyacc_stdX
+ 5  tBodyAcc-std()-Y  std      Y      t  bodyacc   tbodyacc_stdY
+````
+
+A final step required is to filter results to those columns that are 'mean' or 'std'.  A filter() function is used  
+to accomplish this task.  To better understand the expected results of the filter, a distribution was created
 
 
 
