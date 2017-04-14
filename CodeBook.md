@@ -805,7 +805,7 @@ of data which could occur if only 'subjectid' was captured.
 NOTE:  There are 30 unique subject id.  subject_test: 2, 4, 9, 10, 12, 13, 18, 20,24; subject_train: remaining up to 30  
 ````r
 Table:  'subject_train'			Table:  'subject_test'	
-subjectid	rowindx		      subjectid	rowindx
+subjectid	rowindx		        subjectid	rowindx
      1    	  1     		     2    	  1     
      1    	  2     		     2    	  2     
      1    	  3     		     2    	  3     
@@ -906,7 +906,6 @@ subjectid	rowindx		      subjectid	rowindx
      1    	  98    		     2    	  98    
      1    	  99    		     2    	  99    
      1    	  100   		     2    	  100   
-
-
+````
 
 
