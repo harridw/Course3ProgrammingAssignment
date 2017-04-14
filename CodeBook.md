@@ -136,11 +136,11 @@ strings within feature column, using grepl() function, to assign names / codes t
 
 ````r
 indx      	feature                           stat      axial	domain	category            	clearname                     
-1  	tBodyAcc-mean()-X                   mean      	X    	t    	bodyacc             	tbodyacc_meanX                
-2  	tBodyAcc-mean()-Y                  	mean      	Y    	t    	bodyacc             	tbodyacc_meanY                
-3  	tBodyAcc-mean()-Z                   mean      	Z    	t    	bodyacc             	tbodyacc_meanZ                
-4  	tBodyAcc-std()-X                   	std       	X    	t    	bodyacc             	tbodyacc_stdX                 
-5  	tBodyAcc-std()-Y                    std       	Y    	t    	bodyacc             	tbodyacc_stdY                 
+1  	tBodyAcc-mean()-X                     mean      	X    	t    	bodyacc             	tbodyacc_meanX                
+2  	tBodyAcc-mean()-Y                  	  mean      	Y    	t    	bodyacc             	tbodyacc_meanY                
+3  	tBodyAcc-mean()-Z                     mean      	Z    	t    	bodyacc             	tbodyacc_meanZ                
+4  	tBodyAcc-std()-X                   	  std       	X    	t    	bodyacc             	tbodyacc_stdX                 
+5  	tBodyAcc-std()-Y                      std       	Y    	t    	bodyacc             	tbodyacc_stdY                 
 6  	tBodyAcc-std()-Z                   	std       	Z    	t    	bodyacc             	tbodyacc_stdZ                 
 7  	tBodyAcc-mad()-X                   	other     	X    	t    	bodyacc             	tbodyacc_otherX               
 8  	tBodyAcc-mad()-Y                    other     	Y    	t    	bodyacc             	tbodyacc_otherY               
