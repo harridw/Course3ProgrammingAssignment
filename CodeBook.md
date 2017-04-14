@@ -132,7 +132,7 @@ strings within feature column, using grepl() function, to assign names / codes t
 - stat --> leverages string 'mean() or std(); default = 'other'  
 - axial --> although generally at end of name, it was necessary to look for X within name; default = 'U'  
 - domain --> based on letter 't' or 'f' at the beginning of name [pattern = "^t" or "^f"]; default = 'U'  
-- category --> assigned based on the signal measure, including those after apply Fast Fourier Transform (FFT)   
+- category --> assigned based on the signal measure, including those derived by Fast Fourier Transform (FFT)   
 
 ````r
 indx      	feature                         stat        axial  domain	category          clearname                     
@@ -716,6 +716,11 @@ otherwise used in creating tidy data set 'X_tidy_data'
 6 LAYING
 ````
 
+#### **Activity by observation**  
+Tables 'y_test' and 'y_train' included only the activity id or index for each of the observations.  To facilitate  
+the accurate use of this data, a 'rowindx' column is added to assign the activitiy to a specific observation or row.  
+This ensures that observation / row 1 has the same activity id/index associated with it.  The 'rowindx' is created  
+by using seq() function:  seq(along = y_test$activityid) and seq(along = y_train$activitiyid)  
 
 
 
