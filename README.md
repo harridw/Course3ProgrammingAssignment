@@ -209,7 +209,7 @@ observations are stored in  the dataset --> consistency with variable datasets (
 - subject_train$rowindx <- as.factor(seq(along = subject_train$subjectid))
 ````
 
-#### **Merge Datasets - part 1**  
+#### **Merge/Combine Datasets - Part 1**  
 The first datasets to be merged relate to descriptive information about an observation (e.g. subject id, activity).  
 These datasets will be merged, or combined [using cbind()], with the variable datasets to provide more complete dataset.
 
@@ -345,11 +345,51 @@ indx       feature    stat  axial domain category      clearname
  5  tBodyAcc-std()-Y  std      Y      t  bodyacc   tbodyacc_stdY
 ````
 
-A final step required is to filter results to those columns that are 'mean' or 'std'.  A filter() function is used  
-to accomplish this task.  To better understand the expected results of the filter, a distribution was created
+A final step required is to filter results to those columns that are 'mean' or 'std'.  A filter() function is    
+used to accomplish this task.  To better understand the expected results of the filter, a distribution is  
+created using table() function. As noted below, there are 66 columns with 'mean' or 'std'.  The filter ()  
+used includes variable names that are not 'other' in measures$stat.
+````r
+addmargins(table(measures$stat, measures$axial))
+        U   X   Y   Z Sum
+mean    9   8   8   8  33
+other 237  91  86  81 495
+std     9   8   8   8  33
+Sum   255 107 102  97 561
 
+measures_filter <- filter(measures, stat != "other")
+````
 
+#### **Desired variables**
+NOTE:  The filter() function only limits the rows included in the result based on criteria applied.  We want to  
+include on those rows where 'stat' column is 'mean' or 'std', creating 66 variable columns (rows in measures dataset)  
+To select only those columns from 'X_test' and 'X_test' that meet this criteria, we use vector of 'indx' in the  
+measures data of the filtered results (66 columns).  There are two steps.  First, select the desired variable columns.  
+Next, replace the default names (V1, V2, etc...) with the clearnames from the measures table.  
+````r
+Include only those colums in X_test & X_train defined by filter criteria --> mean()/std() + ('X', 'Y', 'Z')
+- X_test_filter <- select(X_test, c(measures_filter$indx))
+- X_train_filter <- select(X_train, c(measures_filter$indx))
 
+Adding clearer, or more descriptive, column names for the different variables
+- curr_names_test <- names(X_test_filter)
+- curr_names_train <- names(X_train_filter)
+- new_names <- c(measures_filter$clearname)
+- setnames(X_test_filter, c(curr_names_test), c(new_names))
+- setnames(X_train_filter, c(curr_names_train), c(new_names))
+````
+
+#### **Merge/Combine Datasets - Part 2**  
+Here we are combining the observation labels from 'row_label_test' and 'row_labels_train' with the variable data in  
+'X_test_filter' and 'X_train_filter'.  We will be using cbind() function to combine the datasets.  After cobmining  
+the datasets, a select() function is used to remove 'rowindx' from the dataset.  It is no longer needed in data.  
+````r
+Combine, using cbind() function, the labels (subjectid, activity) for each observation
+- X_test_interim <- cbind(row_label_test, X_test_filter)
+- X_test_interim <- select(X_test_interim, -rowindx)
+- X_train_interim <- cbind(row_label_train, X_train_filter)
+- X_train_interim <- select(X_train_interim, -rowindx)
+````
 
 
 
