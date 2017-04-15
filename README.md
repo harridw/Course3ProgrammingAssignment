@@ -45,8 +45,8 @@ dest_zip <- paste(file.path(maindir),"dataset.zip", sep = "/", collapse = NULL)
 download.file(fileURL, destfile = dest_zip)  
 ````
 
-#### **Unzip files into separate directory / folder**  
-NOTE: Use maindir defined above -- 'maindir'  
+#### **Unzip files into separate directory / folder*  
+NOTE: This creates a directory tree within 'maindir' defined above --> multiple 'txt' files in each folder  
 ````r
 unzipdir <- "unzipfiles"  
 dest_unzip <- file.path(maindir)  
@@ -67,8 +67,9 @@ The text files are as follows:
 1. subject_test.txt 
 2. X_test.txt  
 3. y_test.txt  
-```
-#### **Inertial Signals (test subfolder)**  
+
+````r
+Inertial Signals (test subfolder)  
 1. body_acc_x_test.txt  
 2. body_acc_y_test.txt  
 3. body_acc_z_test.txt  
@@ -80,11 +81,12 @@ The text files are as follows:
 9. total_acc_z_test.txt  
 ```
 
-* train  
+#### **train - subfolder of General / Main**    
 1. subject_train.txt  
 2. X_train.txt  
 3. y_train.txt  
-```
+
+````r
 Inertial Signals (train subfolder)  
 1. body_acc_x_train.txt  
 2. body_acc_y_train.txt  
