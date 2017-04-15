@@ -11,10 +11,12 @@
 #  4.	Appropriately labels the data set with descriptive variable names. 
 #  5.	From the data set in step 4, creates a second, independent tidy data set with the average of each
 #     variable for each activity and each subject.
+#  
+#  Files / activity will be stored in Working Directory "/Users/harridw/Development/Coursera/Course3/PeerGraded"
+#  To facilitate Peer Grading this must be defined as Working Directory of indvidual reviewing
 
-#################################################
-## DO NOT RUN THIS SECTION FOR PEER GRADING    ##
-#################################################
+#  Define directory / folder to download zipfile(s) from stated URL
+path <- getwd()
 
 #  Install packages to support Course 3 Programming Assignment
 install.packages("plyr")
@@ -35,19 +37,17 @@ library(reshape2)
 ##  or queried as needed to produce desired results.          ##
 ################################################################
 
-#  Define directory / folder to download zipfile(s) from stated URL
-setwd ("/Users/harridw/Development/Coursera/Course3/PeerGraded")
-maindir <- "/Users/harridw/Development/Coursera/Course3/PeerGraded"
+
 
 # Downlaod zip file into the designated directory / folder
 fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-dest_zip <- paste(file.path(maindir),"dataset.zip", sep = "/", collapse = NULL)
+dest_zip <- paste(file.path(path),"dataset.zip", sep = "/", collapse = NULL)
 download.file(fileURL, destfile = dest_zip)
 
 #  Unzip files -- placing in separate directory from the zip files
 #  NOTE:  A directory tree is created by unzip process
-dest_unzip <- file.path(maindir)
-unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = FALSE,
+dest_unzip <- file.path(path)
+unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = TRUE,
       exdir = dest_unzip, unzip = "internal", setTimes = FALSE)
 
 
@@ -66,7 +66,7 @@ file_list <- gsub(".txt", "", filelist)
 
 #  Read text files into R
 for(i in file_list)  {
-      filepath <- file.path(path = getwd(), paste(i,".txt",sep=""))
+      filepath <- file.path(path = path, paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, fill = TRUE, header = FALSE)))
 }
 
@@ -230,16 +230,4 @@ X_tidy_data <- rbind(X_test_final, X_train_final)
 ##  Save datasets in R to local directory / folder  ##
 ######################################################
 #  Start by assigning target location as working directory, then write datasets to location as 'txt' file
-setwd ("/Users/harridw/Development/Coursera/Course3/PeerGraded/UCI HAR Dataset")
 write.csv(X_tidy_data, file = "X_tidy_data.txt", row.names = FALSE)
-
-#  These files must be saved to working directory prior to renaming variables
-#  setwd ("/Users/harridw/Development/Coursera/Course3/PeerGraded")
-#  write.table(activity_labels, file = "activity_labels.txt", row.names = FALSE)
-#  write.table(features, file = "features.txt", row.names = FALSE)
-#  write.table(subject_test, file = "subject_test.txt", row.names = FALSE)
-#  write.table(subject_train, file = "subject_train.txt", row.names = FALSE)
-#  write.table(X_test, file = "X_test.txt", row.names = FALSE)
-#  write.table(X_train, file = "X_train.txt", row.names = FALSE)
-#  write.table(y_test, file = "y_test.txt", row.names = FALSE)
-#  write.table(y_train, file = "y_train.txt", row.names = FALSE)
