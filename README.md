@@ -35,13 +35,12 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 ````r
 Define directory to place zip file:  
 ===================================
-setwd ("/Users/harridw/Development/Coursera/Course3/PeerGraded")
-maindir <- "/Users/harridw/Development/Coursera/Course3/PeerGraded/Course3ProgrammingAssignment"   
+path <- getwd()
 
 Steps to download file:  
 =======================
 fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"  
-dest_zip <- paste(file.path(maindir),"dataset.zip", sep = "/", collapse = NULL)  
+dest_zip <- paste(file.path(path),"dataset.zip", sep = "/", collapse = NULL)  
 download.file(fileURL, destfile = dest_zip)  
 ````
 
@@ -49,8 +48,8 @@ download.file(fileURL, destfile = dest_zip)
 NOTE: This creates a directory tree within 'maindir' defined above --> multiple 'txt' files in each folder  
 ````r
 unzipdir <- "unzipfiles"  
-dest_unzip <- file.path(maindir)  
-unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = FALSE,  
+dest_unzip <- file.path(path)  
+unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = TRUE,  
       exdir = dest_unzip, unzip = "internal", setTimes = FALSE)  
 ````
 
@@ -114,7 +113,7 @@ Remove text (txt) extension so that file name can be used as name in R -- facili
 
 Read text files into R
 - for(i in file_list)  {
-      filepath <- file.path(path = getwd(), paste(i,".txt",sep=""))
+      filepath <- file.path(path = path, paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, fill = TRUE, header = FALSE)))
   }
 ````
