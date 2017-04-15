@@ -299,7 +299,7 @@ To select only those columns from 'X_test' and 'X_test' that meet this criteria,
 measures data of the filtered results (66 columns).  There are two steps.  First, select the desired variable columns.  
 Next, replace the default names (V1, V2, etc...) with the clearnames from the measures table.  
 ````r
-Include only those colums in X_test & X_train defined by filter criteria --> mean()/std() + ('X', 'Y', 'Z')
+Include only those colums in X_test & X_train defined by filter criteria --> mean()/std()
 - X_test_filter <- select(X_test, c(measures_filter$indx))
 - X_train_filter <- select(X_train, c(measures_filter$indx))
 
@@ -429,9 +429,6 @@ This set of text files are from 'train' folder, root_train_files.  Does not incl
       filepath <- file.path(maindir,root_main, root_train1, paste(i,".txt",sep=""))
       assign(i, data.table(read.table(filepath, fill = TRUE, header = FALSE)))
   }  
-  ````
-
-
-
+````
 
 
