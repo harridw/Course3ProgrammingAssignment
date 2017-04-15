@@ -15,8 +15,22 @@
 #  Files / activity will be stored in Working Directory "/Users/harridw/Development/Coursera/Course3/PeerGraded"
 #  To facilitate Peer Grading this must be defined as Working Directory of indvidual reviewing
 
+
 #  Define directory / folder to download zipfile(s) from stated URL
 path <- getwd()
+
+# Downlaod zip file into the designated directory / folder
+fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+dest_zip <- paste(file.path(path),"dataset.zip", sep = "/", collapse = NULL)
+download.file(fileURL, destfile = dest_zip)
+
+#  Unzip files -- placing in separate directory from the zip files
+#  NOTE:  A directory tree is created by unzip process
+dest_unzip <- file.path(path)
+unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = TRUE,
+      exdir = dest_unzip, unzip = "internal", setTimes = FALSE)
+
+
 
 #  Install packages to support Course 3 Programming Assignment
 install.packages("plyr")
@@ -32,29 +46,10 @@ library(tidyr)
 install.packages("reshape2")
 library(reshape2)
 
-################################################################
-##  Obtain data from target location that may be manipulated  ##
-##  or queried as needed to produce desired results.          ##
-################################################################
-
-
-
-# Downlaod zip file into the designated directory / folder
-fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-dest_zip <- paste(file.path(path),"dataset.zip", sep = "/", collapse = NULL)
-download.file(fileURL, destfile = dest_zip)
-
-#  Unzip files -- placing in separate directory from the zip files
-#  NOTE:  A directory tree is created by unzip process
-dest_unzip <- file.path(path)
-unzip(dest_zip, files = NULL, list = FALSE, overwrite = TRUE, junkpaths = TRUE,
-      exdir = dest_unzip, unzip = "internal", setTimes = FALSE)
-
 
 ################################################################
 ##  Read target files into R to facilitate working with them  ##
 ################################################################
-
 
 #  Create list of the target files.  To provide flexibility for which files, code is split into sections
 filelist <- list.files(pattern = ".*.txt", all.files = FALSE, full.names = FALSE,
